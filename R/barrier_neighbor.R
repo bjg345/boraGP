@@ -2,7 +2,7 @@
 barrier_neighbor <- function(coords, coords.0 = NULL, ord = NULL,  
                              n.neighbors = 15, barrier, 
                              cores = 2, 
-                             verbose = TRUE, 
+                             verbose = TRUE, min.gridsize = 0,
                              debug = list(barrier_n.indx = NULL, 
                                           barrier_dist = NULL, 
                                           barrier_nn.indx.0_list = NULL, 
@@ -139,8 +139,8 @@ barrier_neighbor <- function(coords, coords.0 = NULL, ord = NULL,
           
           ## grid size is the shortest overlapped length
           pt1 <- coords_sf_ord[i]
-          gridsize <- min(sapply(nindx, function(j) cross_length(
-            barrier = barrier, pt1 = pt1, pt2 = coords_sf_ord[j])))
+          gridsize <- max(min.gridsize, min(sapply(nindx, function(j) cross_length(
+            barrier = barrier, pt1 = pt1, pt2 = coords_sf_ord[j]))))
           
           ## the half length of the grid box is the longest distance 
           ## from n.neighbors nearest neighbors
@@ -336,8 +336,8 @@ barrier_neighbor <- function(coords, coords.0 = NULL, ord = NULL,
             
             ## grid size is the shortest overlapped length
             pt1 <- coords_sf$geometry[n_tr+i]
-            gridsize <- min(sapply(nindx, function(j) cross_length(
-              barrier = barrier, pt1 = pt1, pt2 = coords_sf$geometry[j])))
+            gridsize <- max(min.gridsize, min(sapply(nindx, function(j) cross_length(
+              barrier = barrier, pt1 = pt1, pt2 = coords_sf$geometry[j]))))
             
             ## the half length of the grid box is the longest distance 
             ## from n.neighbors nearest neighbors
