@@ -117,7 +117,7 @@ find_hn_U <- function(need_idx, barrier_nn.indx.0_list, barrier_dist0,
 }
 
 cross_length <- function(barrier, pt1, pt2) {
-  line <- sf::st_cast(st_combine(c(pt1, pt2)), "LINESTRING")
+  line <- sf::st_cast(sf::st_combine(c(pt1, pt2)), "LINESTRING")
   cross_length <- sf::st_length(sf::st_intersection(line, sf::st_buffer(barrier, 0)))
   return(ifelse(length(cross_length) == 0, 0, sum(cross_length)))
 }
