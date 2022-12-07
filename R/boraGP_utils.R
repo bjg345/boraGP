@@ -124,7 +124,7 @@ cross_length <- function(barrier, pt1, pt2) {
 
 test_cross <- function(barrier, pt1, pt2) {
   line <- sf::st_cast(sf::st_combine(c(pt1, pt2)), "LINESTRING")
-  return(as.numeric(st_intersects(line, barrier)))
+  return(as.numeric(sf::st_intersects(line, barrier)))
 }
 
 create_Ctilde <- function(coords, neighbor.info, sig_sq, phi, nu = NULL,
