@@ -34,7 +34,7 @@ barrier_neighbor <- function(coords, coords.0 = NULL, ord = NULL,
   
   # make coords as an sf object
   crs <- sf::st_crs(barrier)
-  coords_sf <- st_as_sf(rbind(coords, coords.0), 
+  coords_sf <- sf::st_as_sf(rbind(coords, coords.0), 
                         coords = c("easting", "northing"), 
                         crs = crs)
   
@@ -145,12 +145,12 @@ barrier_neighbor <- function(coords, coords.0 = NULL, ord = NULL,
           ## the half length of the grid box is the longest distance 
           ## from n.neighbors nearest neighbors
           radius <- max(ndists)
-          gridbox <- st_bbox(pt1) + c(-radius, -radius, radius, radius)
+          gridbox <- sf::st_bbox(pt1) + c(-radius, -radius, radius, radius)
           igrid <- expand.grid(easting = seq(gridbox$xmin, 
                                              gridbox$xmax, by = gridsize), 
                                northing = seq(gridbox$ymin, 
                                               gridbox$ymax, by = gridsize))
-          igrid_sf <- st_as_sf(igrid, coords = c("easting", "northing"), 
+          igrid_sf <- sf::st_as_sf(igrid, coords = c("easting", "northing"), 
                                crs = crs)
           n_igrid <- nrow(igrid)
           
@@ -342,12 +342,12 @@ barrier_neighbor <- function(coords, coords.0 = NULL, ord = NULL,
             ## the half length of the grid box is the longest distance 
             ## from n.neighbors nearest neighbors
             radius <- max(ndists)
-            gridbox <- st_bbox(pt1) + c(-radius, -radius, radius, radius)
+            gridbox <- sf::st_bbox(pt1) + c(-radius, -radius, radius, radius)
             igrid <- expand.grid(easting = seq(gridbox$xmin, 
                                                gridbox$xmax, by = gridsize), 
                                  northing = seq(gridbox$ymin, 
                                                 gridbox$ymax, by = gridsize))
-            igrid_sf <- st_as_sf(igrid, coords = c("easting", "northing"), 
+            igrid_sf <- sf::st_as_sf(igrid, coords = c("easting", "northing"), 
                                  crs = crs)
             n_igrid <- nrow(igrid)
             
